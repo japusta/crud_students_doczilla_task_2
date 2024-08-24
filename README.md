@@ -1,6 +1,7 @@
 файл сервера находится в директории demo/src/main/java/com/example (StudentAPI.java).
 запуск StudentAPI.java с помощью команд:
 mvn clean install
+
 mvn exec:java -Dexec.mainClass="com.example.StudentAPI"
 
 ниже интерфейс проограммы и примеры работы. Клиентская часть запускается открытием index.html из директории client.
