@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Management</h1>
+
+        <h2>Add Student</h2>
+        <form id="addStudentForm">
+            <input type="text" id="firstName" placeholder="First Name" required>
+            <input type="text" id="lastName" placeholder="Last Name" required>
+            <input type="text" id="middleName" placeholder="Middle Name">
+            <input type="date" id="birthDate" required>
+            <input type="text" id="studentGroup" placeholder="Group" required>
+            <button type="submit">Add Student</button>
+        </form>
+        <!-- Блок для сообщений об успешном добавлении -->
+        <div id="addMessage" class="message"></div>
+
+        <h2>Delete Student</h2>
+        <form id="deleteStudentForm">
+            <input type="number" id="studentId" placeholder="Student ID" required>
+            <button type="submit">Delete Student</button>
+        </form>
+        <!-- Блок для сообщений об успешном удалении -->
+        <div id="deleteMessage" class="message"></div>
+
+        <h2>Student List</h2>
+        <button id="listStudents">List Students</button>
+        <table id="studentList">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Middle Name</th>
+                    <th>Birth Date</th>
+                    <th>Group</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!-- Блок для сообщений об обновлении списка студентов -->
+        <div id="listMessage" class="message"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
