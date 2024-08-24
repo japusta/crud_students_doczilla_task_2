@@ -18,21 +18,15 @@ import static spark.Spark.port;
 import static spark.Spark.post;
 
 public class StudentAPI {
-
     public static void main(String[] args) {
-        // Установите порт для сервера
         port(4567);
-
         enableCORS("*", "*", "*");
-
         // Подключение к базе данных
         Connection conn = connectToDB();
-
         if (conn == null) {
             System.err.println("Failed to connect to the database.");
             return;
         }
-
         // Добавить студента
         post("/students", (request, response) -> {
             JSONObject data = new JSONObject(request.body());
@@ -41,7 +35,6 @@ public class StudentAPI {
             String middleName = data.optString("middle_name", "");
             String birthDate = data.getString("birth_date");
             String studentGroup = data.getString("student_group");
-
             String query = "INSERT INTO students (first_name, last_name, middle_name, birth_date, student_group) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -56,15 +49,12 @@ public class StudentAPI {
                 e.printStackTrace();
                 response.status(500);
             }
-
             return "Student added";
         });
-
         // Удалить студента
         delete("/students/:id", (request, response) -> {
             int id = Integer.parseInt(request.params("id"));
             String query = "DELETE FROM students WHERE id = ?";
-
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setInt(1, id);
                 int rowsAffected = stmt.executeUpdate();
@@ -76,10 +66,8 @@ public class StudentAPI {
             } catch (SQLException e) {
                 response.status(500);
             }
-
             return "Student deleted";
         });
-
         // Вывод списка студентов
         get("/students", (request, response) -> {
             String query = "SELECT * FROM students";
@@ -101,7 +89,6 @@ public class StudentAPI {
             return result.toString();
         });
     }
-
     private static Connection connectToDB() {
         try {
             return DriverManager.getConnection("jdbc:postgresql://localhost:5432/student_db", "postgres", "1111");
@@ -110,30 +97,25 @@ public class StudentAPI {
             return null;
         }
     }
-
-    // Метод для разрешения CORS
+    // для разрешения CORS
     private static void enableCORS(final String origin, final String methods, final String headers) {
         options("/*", (request, response) -> {
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
                 response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
             }
-
             String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
             if (accessControlRequestMethod != null) {
                 response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
             }
-
             return "OK";
         });
-
         before((request, response) -> {
             response.header("Access-Control-Allow-Origin", origin);
             response.header("Access-Control-Allow-Methods", methods);
             response.header("Access-Control-Allow-Headers", headers);
-            // Данный заголовок для предотвращения кэширования CORS-запросов
+            // для предотвращения кэширования CORS-запросов
             response.header("Access-Control-Allow-Credentials", "true");
         });
-    }
-    
+    }  
 }
