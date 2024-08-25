@@ -1,4 +1,5 @@
 файл сервера находится в директории demo/src/main/java/com/example (StudentAPI.java).
+также прикреплен файл базы данных, использовал PostgreSQL
 запуск StudentAPI.java с помощью команд:
 
 mvn clean install
