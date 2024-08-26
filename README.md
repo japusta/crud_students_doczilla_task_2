@@ -1,6 +1,7 @@
 файл сервера находится в директории demo/src/main/java/com/example (StudentAPI.java).
 
 также прикреплен файл базы данных, использовал PostgreSQL. Экспорт и восстановление БД делается с помощью команд:
+
 pg_dump -U postgres -d student_db -f student_db.sql -- экспорт
 
 psql -U postgres -f student_db.sql -- восстановление БД
